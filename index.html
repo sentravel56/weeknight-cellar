@@ -5,101 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Weeknight Cellar — Top 10 Wines Under $25</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F3EEEF;
-    --ink:#2B1219;
-    --muted:#7A6A6E;
-    --line:#DCD1D4;
-    --card:#FBF8F8;
-    --accent:#8E1F33;
-    --accent-soft:#F0DCE0;
+    --paper:#F3EEEF; --ink:#2B1219; --muted:#7A6A6E; --line:#DCD1D4; --card:#FBF8F8;
+    --accent:#8E1F33; --accent-soft:#F0DCE0;
   }
   body.theme-white{ --accent:#A87E14; --accent-soft:#F1E7CE; }
   body.theme-mixed{ --accent:#5E2750; --accent-soft:#E8DCE8; }
-
   *{box-sizing:border-box;margin:0;padding:0}
   @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
-
-  body{font-family:'Karla',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+  body{font-family:'Karla',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-text-size-adjust:100%}
   .wrap{max-width:880px;margin:0 auto;padding:0 20px 80px}
 
   header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);transition:color .4s}
   h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(34px,6vw,54px);line-height:1.05;margin:10px 0 12px}
   h1 em{font-style:italic;font-weight:400;color:var(--accent);transition:color .4s}
-  .sub{color:var(--muted);max-width:54ch}
+  .sub{color:var(--muted);max-width:56ch}
 
-  .controls{padding:32px 0;border-bottom:1px solid var(--line)}
+  .controls{padding:30px 0;border-bottom:1px solid var(--line)}
   .group-head{display:flex;align-items:baseline;gap:12px;margin:22px 0 9px;flex-wrap:wrap}
   .group-head:first-child{margin-top:0}
   .group-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .mini{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    background:none;border:none;border-bottom:1px solid var(--line);color:var(--accent);
-    cursor:pointer;padding:0 0 1px;transition:border-color .2s
-  }
+  .mini{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:none;border:none;border-bottom:1px solid var(--line);color:var(--accent);cursor:pointer;padding:0 0 1px;transition:border-color .2s}
   .mini:hover{border-color:var(--accent)}
   .mini:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{
-    font-family:'Karla',sans-serif;font-size:14px;font-weight:500;
-    display:inline-flex;align-items:center;gap:8px;
-    padding:8px 14px;border:1px solid var(--line);border-radius:999px;
-    background:var(--card);color:var(--ink);cursor:pointer;
-    transition:border-color .2s, background .2s, color .2s;
-  }
-  .chip .box{
-    width:13px;height:13px;border:1.5px solid var(--line);border-radius:3px;
-    display:inline-block;position:relative;transition:border-color .2s,background .2s;
-  }
+  .chip{font-family:'Karla',sans-serif;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+  .chip .box{width:13px;height:13px;border:1.5px solid var(--line);border-radius:3px;display:inline-block;position:relative;transition:border-color .2s,background .2s}
   .chip:hover{border-color:var(--accent)}
   .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   .chip[aria-pressed="true"] .box{background:#fff;border-color:#fff}
-  .chip[aria-pressed="true"] .box::after{
-    content:'';position:absolute;left:3.5px;top:0.5px;width:4px;height:8px;
-    border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg);
-  }
+  .chip[aria-pressed="true"] .box::after{content:'';position:absolute;left:3.5px;top:.5px;width:4px;height:8px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
 
-  .slider-row{display:flex;align-items:center;gap:20px;margin:28px 0 22px;flex-wrap:wrap}
-  .price-readout{font-family:'Fraunces',serif;font-weight:600;font-size:40px;min-width:110px}
+  .slider-row{display:flex;align-items:center;gap:20px;margin:28px 0 6px;flex-wrap:wrap}
+  .price-readout{font-family:'Fraunces',serif;font-weight:600;font-size:40px;min-width:112px}
   .price-readout small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  input[type=range]{
-    -webkit-appearance:none;appearance:none;flex:1;min-width:220px;height:10px;border-radius:999px;
-    background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--fill,60%),var(--line) var(--fill,60%));cursor:pointer;
-  }
+  input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:220px;height:10px;border-radius:999px;background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--fill,60%),var(--line) var(--fill,60%));cursor:pointer}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:0 2px 6px rgba(43,18,25,.25)}
   input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:0 2px 6px rgba(43,18,25,.25)}
   input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)}
 
-  .go-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .go{font-family:'Karla',sans-serif;font-weight:700;font-size:16px;padding:13px 28px;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:#fff;transition:background .2s,transform .1s}
-  .go:hover{filter:brightness(1.1)}
-  .go:active{transform:translateY(1px)}
-  .go:disabled{opacity:.5;cursor:not-allowed}
-  .go:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .stamp{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)}
-
-  .results{padding-top:28px}
-  .status{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);padding:32px 0;text-align:center}
-  .status.error{color:var(--accent)}
-  .pouring::after{content:'';animation:dots 1.2s steps(4,end) infinite}
-  @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
-
-  .card{display:grid;grid-template-columns:44px 1fr auto;gap:6px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:14px}
+  .results{padding-top:26px}
+  .empty{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);padding:40px 0;text-align:center}
+  .card{display:grid;grid-template-columns:44px 1fr auto;gap:5px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:14px}
   .rank{font-family:'Fraunces',serif;font-weight:600;font-size:26px;color:var(--accent);transition:color .4s}
   .wine-name{font-family:'Fraunces',serif;font-weight:600;font-size:20px;line-height:1.2}
-  .varietal-line{grid-column:2;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:-2px}
-  .tag{grid-column:3;grid-row:1;align-self:start;font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;background:var(--accent-soft);color:var(--ink);padding:5px 10px;border-radius:6px;transition:background .4s}
+  .varietal-line{grid-column:2;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .tag{grid-column:3;grid-row:1;align-self:start;font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;background:var(--accent-soft);padding:5px 10px;border-radius:6px;transition:background .4s}
   .notes{grid-column:2/4;font-size:15px;margin-top:4px}
-  .stores{grid-column:2/4;display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;align-items:center}
+  .stores{grid-column:2/4;display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
   .stores-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:2px}
   .store{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-  .disclaimer{margin-top:22px;font-size:12.5px;color:var(--muted)}
-
+  .disclaimer{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
   @media (max-width:560px){
     .card{grid-template-columns:32px 1fr}
     .rank{font-size:20px}
@@ -110,184 +73,257 @@
 </head>
 <body>
 <div class="wrap">
-
   <header>
-    <div class="eyebrow">Under $25 · Widely available in the USA</div>
+    <div class="eyebrow">Under $25 &middot; Widely available in the USA</div>
     <h1>The Weeknight <em>Cellar</em></h1>
-    <p class="sub">Pick one varietal, a few, or the whole rack — blends included. Set your ceiling and pour a top 10 — researched live from current reviews and retailer listings every time you ask.</p>
+    <p class="sub">One varietal, a few, or the whole rack. Set your ceiling and the list re-pours instantly &mdash; 110 bottles you can actually find on an American shelf.</p>
   </header>
 
-  <section class="controls" aria-label="Wine filters">
+  <section class="controls" aria-label="Filters">
     <div class="group-head">
       <span class="group-label">Red wines</span>
       <button class="mini" data-all="red">All reds</button>
       <button class="mini" data-none="red">None</button>
     </div>
     <div class="chips" id="redChips"></div>
-
     <div class="group-head">
       <span class="group-label">White wines</span>
       <button class="mini" data-all="white">All whites</button>
       <button class="mini" data-none="white">None</button>
     </div>
     <div class="chips" id="whiteChips"></div>
-
     <div class="group-head">
       <button class="mini" data-all="every">Select all eleven</button>
       <button class="mini" data-none="every">Clear all</button>
     </div>
-
     <div class="slider-row">
-      <div class="price-readout"><span id="priceVal">$20</span><small>max price</small></div>
-      <input type="range" id="price" min="8" max="25" step="1" value="20" aria-label="Maximum price in dollars">
+      <div class="price-readout"><span id="priceVal">$25</span><small>max price</small></div>
+      <input type="range" id="price" min="8" max="25" step="1" value="25" aria-label="Maximum price in dollars">
     </div>
-
-    <div class="go-row">
-      <button class="go" id="go">Pour my top 10</button>
-      <span class="stamp" id="stamp"></span>
-    </div>
+    <p class="count" id="count"></p>
   </section>
 
-  <section class="results" id="results" aria-live="polite">
-    <p class="status">Choose your varietals above to begin. Every pour runs fresh research.</p>
-  </section>
-
+  <section class="results" id="results" aria-live="polite"></section>
 </div>
-
 <script>
+const DATA = {
+"Pinot Noir":[
+["Meiomi California","2023",22,"Plush black cherry, mocha, soft vanilla finish",["Total Wine","Kroger","Target"]],
+["La Crema Sonoma Coast","2022",25,"Bright raspberry and cola, silky, faintly smoky",["Total Wine","Costco","Safeway"]],
+["Erath Oregon","2022",18,"Cranberry and forest floor, lively acidity",["Total Wine","Costco","Safeway"]],
+["A to Z Wineworks Oregon","2022",20,"Red plum, dried herbs, gentle tannin",["Total Wine","Whole Foods","wine.com"]],
+["Acrobat Oregon","2023",20,"Strawberry and rhubarb, clean and unoaked",["Total Wine","Whole Foods"]],
+["DeLoach Heritage Reserve","2023",15,"Cherry-berry richness with warm baking spice",["Total Wine","Safeway"]],
+["Bogle California","2022",12,"Juicy dark cherry, light oak, easy weeknight pour",["Kroger","Safeway","Total Wine"]],
+["Angeline California","2022",14,"Ripe raspberry, cinnamon, smooth and round",["Total Wine","Kroger"]],
+["Mark West California","2022",11,"Simple red fruit and vanilla, very approachable",["Kroger","Walmart","Target"]],
+["Cono Sur Bicicleta Chile","2023",10,"Tart cherry and violet, remarkable at the price",["Total Wine","Trader Joe's"]]
+],
+"Merlot":[
+["Decoy by Duckhorn California","2022",25,"Blackberry, cocoa, polished and generous",["Total Wine","Costco","wine.com"]],
+["Chateau Ste. Michelle Columbia Valley","2021",15,"Plum and cherry, supple, dependable year to year",["Total Wine","Safeway","Kroger"]],
+["Charles Smith Velvet Devil","2022",15,"Dark plum and espresso, plush texture",["Total Wine","Whole Foods"]],
+["Columbia Crest Grand Estates","2021",12,"Black cherry and mild oak, soft tannin",["Total Wine","Kroger","Target"]],
+["Frei Brothers Reserve Dry Creek","2021",20,"Blueberry and mocha, rounded and rich",["Total Wine","Safeway"]],
+["Bogle California","2022",12,"Ripe plum, toasty vanilla, honest value",["Kroger","Safeway"]],
+["Josh Cellars California","2022",15,"Red plum and light spice, crowd-pleasing",["Target","Kroger","Total Wine"]],
+["14 Hands Columbia Valley","2022",12,"Cherry and chocolate, easy and smooth",["Kroger","Safeway","Walmart"]],
+["Sterling Vintner's Collection","2021",14,"Blackberry with a cedar edge, medium body",["Total Wine","Safeway"]],
+["Casillero del Diablo Chile","2022",11,"Bright plum, herbal lift, dinner-table reliable",["Total Wine","Kroger"]]
+],
+"Cabernet Sauvignon":[
+["Louis M. Martini Sonoma County","2021",22,"Cassis and cedar, firm but friendly tannin",["Costco","Total Wine","Safeway"]],
+["Decoy by Duckhorn California","2022",25,"Blackcurrant, graphite, refined finish",["Total Wine","Costco"]],
+["Chateau Ste. Michelle Indian Wells","2021",22,"Dark berry and mocha, velvety mid-palate",["Total Wine","Safeway"]],
+["Liberty School Paso Robles","2022",18,"Blackberry jam, vanilla, sturdy structure",["Total Wine","Whole Foods"]],
+["Kirkland Signature Napa Valley","2022",14,"Cassis and toasted oak, punches above price",["Costco"]],
+["Bogle California","2021",12,"Blackberry, black pepper, reliable everyday Cab",["Kroger","Safeway","Total Wine"]],
+["Josh Cellars California","2022",16,"Dark cherry and mocha, soft and popular",["Target","Kroger","Total Wine"]],
+["Columbia Crest Grand Estates","2021",12,"Currant and light herb, smooth finish",["Total Wine","Kroger"]],
+["Robert Mondavi Private Selection","2022",13,"Bourbon-barrel vanilla over ripe dark fruit",["Kroger","Target","Walmart"]],
+["Alamos Mendoza","2022",12,"Plummy and spicy, grill-friendly",["Total Wine","Kroger"]]
+],
+"Zinfandel":[
+["Ridge Three Valleys","2022",25,"Brambly raspberry, pepper, beautifully balanced",["Total Wine","Whole Foods","wine.com"]],
+["Seghesio Sonoma County","2022",25,"Blackberry and clove, elegant for the grape",["Total Wine","Costco"]],
+["Dry Creek Vineyard Heritage","2021",22,"Wild berry, cracked pepper, lively acidity",["Total Wine","wine.com"]],
+["Klinker Brick Lodi","2021",20,"Concentrated dark fruit, mocha, big frame",["Total Wine"]],
+["Cline Ancient Vines","2022",16,"Jammy blackberry with a smoky edge",["Total Wine","Safeway","Kroger"]],
+["7 Deadly Zins Lodi","2021",16,"Rich plum and vanilla, unapologetically bold",["Total Wine","Kroger","Safeway"]],
+["Predator Old Vine Lodi","2022",15,"Boysenberry and spice, chewy texture",["Total Wine","Whole Foods"]],
+["Bogle Old Vine","2021",13,"Berry pie and pepper, the value benchmark",["Kroger","Safeway","Total Wine"]],
+["Peachy Canyon Incredible Red","2022",15,"Ripe raspberry, soft tannin, barbecue's friend",["Total Wine"]],
+["Gnarly Head Old Vine","2022",11,"Sweet dark fruit and toast, big and easy",["Kroger","Target","Walmart"]]
+],
+"Syrah (Shiraz)":[
+["Jim Barry The Lodge Hill Clare Valley","2021",25,"Blackberry, black pepper, taut and savory",["Total Wine"]],
+["d'Arenberg The Footbolt McLaren Vale","2021",22,"Dark plum, licorice, dusty spice",["Total Wine","wine.com"]],
+["Qupe Central Coast","2021",22,"Smoked meat and violet, cool-climate poise",["Total Wine","Whole Foods"]],
+["Chateau Ste. Michelle Indian Wells","2021",22,"Blueberry and espresso, plush and modern",["Total Wine","Safeway"]],
+["Peter Lehmann Portrait Barossa","2021",18,"Ripe bramble fruit, chocolate, warm finish",["Total Wine"]],
+["Thorn-Clarke Sandpiper Barossa","2022",16,"Blackberry and mocha, generous mid-palate",["Total Wine"]],
+["Penfolds Koonunga Hill","2021",15,"Dark cherry, mint, dependable Aussie staple",["Total Wine","Kroger"]],
+["Cline Cool Climate Sonoma Coast","2022",15,"Peppery raspberry, medium body, food-friendly",["Total Wine"]],
+["Yalumba Y Series South Australia","2022",14,"Juicy plum and spice, everyday drinking",["Total Wine","Kroger"]],
+["Wyndham Estate Bin 555","2022",12,"Soft berry and vanilla, easygoing",["Kroger","Safeway"]]
+],
+"Red Wine Blend":[
+["E. Guigal Cotes du Rhone","2021",18,"Grenache-Syrah: garrigue herbs, dark berry, savory",["Whole Foods","Total Wine","wine.com"]],
+["Marietta Old Vine Red","NV",18,"Zin-based field blend, brambly and spicy",["Total Wine","Whole Foods"]],
+["Ruffino Chianti Classico","2022",18,"Sangiovese: bright cherry, earth, dried herb",["Total Wine","Kroger"]],
+["Delas Saint-Esprit Cotes du Rhone","2021",15,"Syrah-forward: olive, pepper, dark fruit",["Total Wine","Whole Foods"]],
+["Conundrum Red","2021",22,"Soft, fruit-sweet, deliberately unclassifiable",["Total Wine","Safeway"]],
+["Mouton Cadet Bordeaux Rouge","2021",14,"Merlot-Cabernet: currant, cedar, restrained",["Total Wine","Kroger"]],
+["Perrin Reserve Cotes du Rhone","2022",13,"Red berry and pepper, benchmark house red",["Total Wine","Trader Joe's"]],
+["Bogle Essential Red","2021",12,"Old-vine Zin and Petite Sirah, jammy and bold",["Kroger","Safeway"]],
+["Menage a Trois Red","2022",12,"Zin-Merlot-Cab: soft, sweet-edged, crowd-safe",["Kroger","Target","Walmart"]],
+["Apothic Red","2022",12,"Mocha and vanilla over ripe fruit, off-dry",["Kroger","Walmart","Target"]]
+],
+"Chardonnay":[
+["Sonoma-Cutrer Russian River Ranches","2022",25,"Green apple and toasted hazelnut, elegant",["Total Wine","Costco"]],
+["La Crema Sonoma Coast","2023",22,"Meyer lemon, pear, restrained creamy oak",["Total Wine","Costco","Safeway"]],
+["Cambria Katherine's Vineyard","2022",22,"Nectarine and lemon curd, bright acidity",["Total Wine","Whole Foods"]],
+["Louis Latour Bourgogne Blanc","2022",20,"Chalky citrus, unoaked, classically French",["Total Wine"]],
+["Simi Sonoma County","2022",18,"Baked apple and vanilla, silky texture",["Total Wine","Kroger"]],
+["Kendall-Jackson Vintner's Reserve","2023",17,"Tropical fruit and butterscotch, the US bestseller",["Kroger","Total Wine","Target"]],
+["Louis Jadot Macon-Villages","2022",16,"Crisp pear and almond, no oak, great with fish",["Total Wine","Whole Foods"]],
+["J. Lohr Riverstone Arroyo Seco","2022",16,"Peach and creme brulee, plush but fresh",["Total Wine","Safeway"]],
+["Chateau Ste. Michelle Columbia Valley","2022",14,"Apple and citrus, light oak, steady value",["Total Wine","Safeway"]],
+["Bogle California","2022",11,"Barrel-fermented apple and vanilla, budget staple",["Kroger","Safeway"]]
+],
+"Pinot Gris (Pinot Grigio)":[
+["Santa Margherita Alto Adige","2023",25,"Crisp green apple and citrus, the benchmark",["Total Wine","Costco","Kroger"]],
+["Trimbach Alsace Pinot Gris","2022",22,"Ripe pear, smoke, weightier Alsatian style",["Total Wine","wine.com"]],
+["Elk Cove Willamette Valley","2023",22,"White peach and melon, plump and clean",["Total Wine","Whole Foods"]],
+["Alois Lageder Alto Adige","2023",20,"Mineral, pear skin, precise and dry",["Total Wine","wine.com"]],
+["King Estate Oregon","2023",20,"Pear and honeysuckle, rounder Oregon style",["Total Wine","Whole Foods"]],
+["Bollini Trentino","2023",16,"Lemon zest and almond, brisk finish",["Total Wine"]],
+["Zenato Veneto","2023",15,"Citrus and white flower, light and dry",["Total Wine"]],
+["Ecco Domani Delle Venezie","2023",12,"Green apple and lime, simple and chilled",["Kroger","Target","Walmart"]],
+["Cavit Collection","2023",10,"Light pear and citrus, the porch-pour default",["Kroger","Walmart","Safeway"]],
+["Kris Delle Venezie","2023",13,"Apple, mineral, cleaner than most at the price",["Total Wine","Kroger"]]
+],
+"Sauvignon Blanc":[
+["Duckhorn Decoy California","2023",22,"Grapefruit and lemongrass, polished",["Total Wine","Costco"]],
+["Honig Napa Valley","2023",22,"Passionfruit and lime, crisp and lively",["Total Wine","Whole Foods"]],
+["Whitehaven Marlborough","2024",20,"Gooseberry and citrus, classic Kiwi zing",["Total Wine","Costco"]],
+["Kim Crawford Marlborough","2024",18,"Passionfruit and grapefruit, the category leader",["Total Wine","Kroger","Target"]],
+["Dry Creek Vineyard Fume Blanc","2023",18,"Melon and herb, faint oak, food-friendly",["Total Wine","wine.com"]],
+["Joel Gott California","2023",15,"Lime and white peach, bright and clean",["Total Wine","Safeway"]],
+["Oyster Bay Marlborough","2024",14,"Tropical fruit and cut grass, dependable",["Kroger","Safeway","Total Wine"]],
+["Nobilo Marlborough","2024",13,"Citrus and herb, softer New Zealand style",["Kroger","Safeway"]],
+["Matua Marlborough","2024",12,"Passionfruit and lime, zesty everyday bottle",["Kroger","Target","Walmart"]],
+["Brancott Estate Marlborough","2024",12,"Grapefruit and green pepper, sharp and cheap",["Kroger","Walmart"]]
+],
+"Riesling":[
+["Hermann J. Wiemer Dry Finger Lakes","2023",25,"Lime, slate, razor-sharp and bone dry",["wine.com","Whole Foods"]],
+["Dr. Loosen Blue Slate Kabinett","2023",22,"Green apple and mineral, off-dry, low alcohol",["Total Wine","Whole Foods"]],
+["Trimbach Alsace","2022",22,"Steely citrus, bone dry, classic Alsace",["Total Wine","wine.com"]],
+["Leitz Eins Zwei Dry Rheingau","2023",18,"Peach and lime, dry with piercing acidity",["Total Wine","Whole Foods"]],
+["Willm Alsace Reserve","2022",16,"Lemon and white flower, dry and clean",["Total Wine"]],
+["Dr. Loosen Estate Mosel","2023",15,"Apple, apricot, gently sweet and refreshing",["Total Wine","Kroger"]],
+["Selbach Fish Label Mosel","2023",14,"Peach and citrus, off-dry, spicy-food hero",["Total Wine","Whole Foods"]],
+["Charles Smith Kung Fu Girl","2023",14,"Lime and jasmine, nearly dry, great value",["Total Wine","Whole Foods","Kroger"]],
+["Chateau Ste. Michelle Dry","2023",12,"Green apple and lime, dry, everywhere available",["Total Wine","Safeway","Kroger"]],
+["Pacific Rim Dry Columbia Valley","2023",12,"Citrus and mineral, dry and food-friendly",["Total Wine","Whole Foods"]]
+],
+"White Wine Blend":[
+["Conundrum White","2023",22,"Five grapes: tropical fruit, honeyed, unmistakable",["Total Wine","Safeway","Kroger"]],
+["E. Guigal Cotes du Rhone Blanc","2022",20,"Viognier-led: apricot, white flower, textured",["Total Wine","Whole Foods"]],
+["Hugel Gentil Alsace","2022",18,"Alsace field blend: spice, citrus, off-dry lift",["Total Wine","Whole Foods"]],
+["Trimbach Pinot Blanc Alsace","2022",18,"Pear and almond, dry, quietly excellent",["Total Wine"]],
+["Chateau Bonnet Entre-Deux-Mers","2023",15,"Sauvignon-Semillon: grapefruit, chalk, crisp",["Total Wine","wine.com"]],
+["Pine Ridge Chenin Blanc + Viognier","2023",15,"Honeysuckle and melon, off-dry and floral",["Total Wine","Kroger","Safeway"]],
+["Marques de Riscal Rueda","2023",14,"Verdejo blend: lime, fennel, snappy finish",["Total Wine","Whole Foods"]],
+["Torres Vina Esmeralda","2023",14,"Muscat-Gewurztraminer: rose, lychee, lightly sweet",["Total Wine","wine.com"]],
+["Domaine Tariquet Classic Gascogne","2023",12,"Citrus and green apple, brisk and cheap",["Total Wine","Whole Foods"]],
+["Broadbent Vinho Verde","NV",10,"Faintly fizzy, lemon-lime, 9% alcohol",["Total Wine","Whole Foods"]]
+]
+};
 const REDS=["Pinot Noir","Merlot","Cabernet Sauvignon","Zinfandel","Syrah (Shiraz)","Red Wine Blend"];
 const WHITES=["Chardonnay","Pinot Gris (Pinot Grigio)","Sauvignon Blanc","Riesling","White Wine Blend"];
 const selected=new Set(["Pinot Noir"]);
-const TOTAL=REDS.length+WHITES.length;
-let loading=false;
 
-function buildChips(list,el,color){
+function buildChips(list,el){
   list.forEach(v=>{
     const b=document.createElement('button');
-    b.className='chip'; b.type='button'; b.dataset.v=v; b.dataset.color=color;
+    b.className='chip'; b.type='button'; b.dataset.v=v;
     b.innerHTML='<span class="box" aria-hidden="true"></span>'+v;
-    b.setAttribute('aria-pressed', selected.has(v)?'true':'false');
-    b.addEventListener('click',()=>{
-      selected.has(v)?selected.delete(v):selected.add(v);
-      sync();
-    });
+    b.addEventListener('click',()=>{selected.has(v)?selected.delete(v):selected.add(v);render();});
     el.appendChild(b);
   });
 }
-buildChips(REDS,document.getElementById('redChips'),'red');
-buildChips(WHITES,document.getElementById('whiteChips'),'white');
+buildChips(REDS,document.getElementById('redChips'));
+buildChips(WHITES,document.getElementById('whiteChips'));
 
 document.querySelectorAll('.mini').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const on=btn.dataset.all, off=btn.dataset.none;
-    const pick=g=> g==='red'?REDS : g==='white'?WHITES : REDS.concat(WHITES);
-    if(on) pick(on).forEach(v=>selected.add(v));
-    if(off) pick(off).forEach(v=>selected.delete(v));
-    sync();
+    const on=btn.dataset.all,off=btn.dataset.none;
+    const pick=g=>g==='red'?REDS:g==='white'?WHITES:REDS.concat(WHITES);
+    if(on)pick(on).forEach(v=>selected.add(v));
+    if(off)pick(off).forEach(v=>selected.delete(v));
+    render();
   });
 });
 
-function sync(){
-  document.querySelectorAll('.chip').forEach(c=>{
-    c.setAttribute('aria-pressed', selected.has(c.dataset.v)?'true':'false');
-  });
-  const hasRed=REDS.some(v=>selected.has(v));
-  const hasWhite=WHITES.some(v=>selected.has(v));
-  document.body.classList.toggle('theme-white', hasWhite&&!hasRed);
-  document.body.classList.toggle('theme-mixed', hasWhite&&hasRed);
-  const go=document.getElementById('go');
-  go.disabled = selected.size===0;
-  go.textContent = selected.size===0 ? 'Pick at least one varietal'
-    : selected.size===TOTAL ? 'Pour my top 10 across all eleven'
-    : selected.size===1 ? 'Pour my top 10' : 'Pour my top 10 across '+selected.size;
-}
-sync();
+const slider=document.getElementById('price'),priceVal=document.getElementById('priceVal');
+const results=document.getElementById('results'),countEl=document.getElementById('count');
+slider.addEventListener('input',render);
 
-const slider=document.getElementById('price'), priceVal=document.getElementById('priceVal');
-function syncSlider(){
-  priceVal.textContent='$'+slider.value;
-  slider.style.setProperty('--fill', ((slider.value-slider.min)/(slider.max-slider.min))*100+'%');
-}
-slider.addEventListener('input',syncSlider); syncSlider();
+function render(){
+  // chip + theme state
+  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',selected.has(c.dataset.v)?'true':'false'));
+  const hasRed=REDS.some(v=>selected.has(v)),hasWhite=WHITES.some(v=>selected.has(v));
+  document.body.classList.toggle('theme-white',hasWhite&&!hasRed);
+  document.body.classList.toggle('theme-mixed',hasWhite&&hasRed);
 
-const results=document.getElementById('results'), stamp=document.getElementById('stamp'), goBtn=document.getElementById('go');
-goBtn.addEventListener('click',fetchWines);
+  const max=+slider.value;
+  priceVal.textContent='$'+max;
+  slider.style.setProperty('--fill',((max-slider.min)/(slider.max-slider.min))*100+'%');
 
-async function fetchWines(){
-  if(loading||selected.size===0) return;
-  loading=true; goBtn.disabled=true;
-  const price=slider.value;
-  const list=[...selected];
-  const label = list.length===1 ? list[0] : list.length+' varietals';
-  results.innerHTML='<p class="status pouring">Researching current '+esc(label)+' under $'+price+'</p>';
-  stamp.textContent='';
-
-  const spread = list.length>1
-    ? `Cover the list broadly — spread the ten picks across the selected varietals rather than loading up on one, but let quality decide the ranking.`
-    : `All ten should be ${list[0]}.`;
-
-  const prompt=`Today is ${new Date().toDateString()}. Use web search (1-2 searches max) to find CURRENT highly recommended wines in these varietals: ${list.join(', ')}. Every wine must cost $${price} or less and be widely available at major US retailers.
-
-${spread}
-
-Respond with ONLY valid JSON — no markdown fences, no commentary, no text before or after:
-{"wines":[{"name":"Producer + wine name","varietal":"Pinot Noir","vintage":"2022","price":"$18","notes":"tasting notes, max 12 words","stores":["Total Wine","Kroger"]}]}
-
-Rules: exactly 10 wines, ranked best first. Every price at or under $${price} typical US retail. The varietal field must be one of the selected varietals. Stores: 2-3 major US retailers where it is commonly stocked (Total Wine, Costco, Trader Joe's, Kroger, Safeway, Target, BevMo, wine.com). Keep notes terse. Use "NV" if non-vintage.`;
-
-  try{
-    const response=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        model:"claude-sonnet-4-6",
-        max_tokens:1000,
-        messages:[{role:"user",content:prompt}],
-        tools:[{type:"web_search_20250305",name:"web_search"}]
-      })
-    });
-    const data=await response.json();
-    if(data.error) throw new Error(data.error.message||'API error');
-    const text=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
-    const wines=extractWines(text);
-    if(!wines.length) throw new Error('No wines could be parsed from the research.');
-    render(wines,price,list.length>1);
-    stamp.textContent='Updated '+new Date().toLocaleString();
-  }catch(err){
-    results.innerHTML='<p class="status error">Couldn\u2019t finish the pour: '+esc(err.message)+'<br><br>Try again \u2014 fresh research sometimes needs a second attempt.</p>';
-  }finally{
-    loading=false; sync();
+  const chosen=REDS.concat(WHITES).filter(v=>selected.has(v));
+  if(!chosen.length){
+    countEl.textContent='';
+    results.innerHTML='<p class="empty">Pick at least one varietal to pour a list.</p>';
+    return;
   }
-}
 
-function extractWines(text){
-  let s=text.replace(/```json|```/g,'').trim();
-  const start=s.indexOf('{');
-  if(start<0) return [];
-  s=s.slice(start);
-  try{ return JSON.parse(s).wines||[]; }catch(e){}
-  const items=[], re=/\{[^{}]*"name"[^{}]*\}/g; let m;
-  while((m=re.exec(s))!==null){ try{ items.push(JSON.parse(m[0])); }catch(e){} }
-  return items;
-}
+  // filter each varietal by price, keeping curated rank order
+  const pools=chosen.map(v=>DATA[v].filter(w=>w[2]<=max).map(w=>({v:v,w:w})));
+  // round-robin so multiple varietals share the ten slots
+  const picks=[]; let i=0,more=true;
+  while(picks.length<10&&more){
+    more=false;
+    for(const p of pools){ if(p[i]){picks.push(p[i]);more=true;if(picks.length===10)break;} }
+    i++;
+  }
 
-function render(wines,price,showVarietal){
-  const cards=wines.slice(0,10).map((w,i)=>`
-    <article class="card">
-      <div class="rank">${i+1}</div>
-      <div class="wine-name">${esc(w.name||'Unnamed wine')}</div>
-      <div class="tag">${esc(w.vintage||'NV')} &middot; ${esc(w.price||'\u2264$'+price)}</div>
-      ${showVarietal&&w.varietal?'<div class="varietal-line">'+esc(w.varietal)+'</div>':''}
-      <p class="notes">${esc(w.notes||'')}</p>
-      <div class="stores">
-        <span class="stores-label">Find it at</span>
-        ${(w.stores||[]).map(s=>'<span class="store">'+esc(s)+'</span>').join('')}
-      </div>
-    </article>`).join('');
-  results.innerHTML=cards+'<p class="disclaimer">Prices and availability are researched live and vary by state and store \u2014 confirm locally before you drive. Vintages rotate as new releases hit shelves; pour again anytime for fresh picks.</p>';
+  const total=pools.reduce((n,p)=>n+p.length,0);
+  countEl.textContent=picks.length?('Showing '+picks.length+' of '+total+' matching bottles across '+chosen.length+' varietal'+(chosen.length>1?'s':'')):'';
+
+  if(!picks.length){
+    results.innerHTML='<p class="empty">Nothing under $'+max+' in that selection. Raise the ceiling or add a varietal.</p>';
+    return;
+  }
+
+  const showVar=chosen.length>1;
+  results.innerHTML=picks.map((p,n)=>{
+    const w=p.w;
+    return '<article class="card">'+
+      '<div class="rank">'+(n+1)+'</div>'+
+      '<div class="wine-name">'+esc(w[0])+'</div>'+
+      '<div class="tag">'+esc(w[1])+' &middot; $'+w[2]+'</div>'+
+      (showVar?'<div class="varietal-line">'+esc(p.v)+'</div>':'')+
+      '<p class="notes">'+esc(w[3])+'</p>'+
+      '<div class="stores"><span class="stores-label">Find it at</span>'+
+        w[4].map(s=>'<span class="store">'+esc(s)+'</span>').join('')+
+      '</div></article>';
+  }).join('')+
+  '<p class="disclaimer">Ranked best-first within each varietal; with several varietals selected the ten slots are shared evenly. Prices are typical US shelf prices and vary by state and store &mdash; expect a few dollars either way. Vintages rotate: if the year listed is gone, the next release is almost always the same wine. Curated July 2026.</p>';
 }
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+render();
 </script>
 </body>
 </html>
